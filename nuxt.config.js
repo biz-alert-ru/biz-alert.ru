@@ -88,7 +88,7 @@ export default {
     ['vue-yandex-maps/nuxt', {
       apiKey: '',
       lang: 'ru_RU',
-      version: '2.1'
+      version: '2.1.76'
     }],
   ],
   /*

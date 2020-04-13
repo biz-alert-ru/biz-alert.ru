@@ -181,7 +181,7 @@
             <el-form-item label="Количество рабочих мест под угрозой сокращения" prop="jobs_count">
               <el-input-number v-model="form.jobs_count" :min="1"></el-input-number>
             </el-form-item>
-            <el-form-item label="Что могло бы вам помочь?" prop="description">
+            <el-form-item label="Что случилось / Что могло бы вам помочь?" prop="description">
               <el-input type="textarea" v-model="form.description"></el-input>
             </el-form-item>
           </el-form>
@@ -207,7 +207,7 @@
             <div class="text">{{ org.jobs_count }}</div>
           </div>
           <div v-show="org.description.length > 0" class="info">
-            <div class="label">Что может помочь</div>
+            <div class="label">Что случилось / Что может помочь</div>
             <div class="text">{{ org.description }}</div>
           </div>
         </div>
@@ -362,9 +362,17 @@
       async map() {
         this.map.events.add('click', async (e) => {
           let coords = e.get('coords');
-          this.form.coords = coords
-          this.center = coords
-          this.addModal = true
+          window.ymaps.geocode(coords).then((res) => {
+            let firstGeoObject = res.geoObjects.get(0) || ''
+            this.form.address = firstGeoObject.getAddressLine() || ''
+            this.form.coords = coords
+            this.center = coords
+            this.addModal = true
+          }).catch(() => {
+            this.form.coords = coords
+            this.center = coords
+            this.addModal = true
+          })
         })
       }
     },
