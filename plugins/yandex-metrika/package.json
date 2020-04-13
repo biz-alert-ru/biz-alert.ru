@@ -1,0 +1,12 @@
+{
+  "name": "@nuxtjs/yandex-metrika",
+  "version": "0.1.2",
+  "license": "MIT",
+  "repository": "https://github.com/nuxt/modules",
+  "homepage": "https://github.com/nuxt/modules/tree/master/packages/yandex-metrika",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "index.js",
+  "gitHead": "712a666c8c61ed682ae38924ac47dba42e51928c"
+}

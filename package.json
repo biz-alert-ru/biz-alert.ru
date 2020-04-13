@@ -1,0 +1,26 @@
+{
+  "name": "biz-alert",
+  "version": "1.0.0",
+  "description": "Карта умирающего бизнеса России",
+  "author": "biz-alert",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/firebase": "^5.0.3",
+    "dayjs": "^1.8.23",
+    "element-ui": "^2.4.11",
+    "firebase": "^7.13.0",
+    "interact.js": "^1.2.8",
+    "nuxt": "^2.0.0",
+    "vue-yandex-maps": "^0.8.3"
+  },
+  "devDependencies": {
+    "node-sass": "^4.13.1",
+    "sass-loader": "^8.0.2"
+  }
+}
