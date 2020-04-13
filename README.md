@@ -1,6 +1,6 @@
-# biz-alert
+# https://biz-alert.ru - карта бизнеса, терпящего бедствие.
 
-## Build Setup
+## Развернуть проект локально
 
 ```bash
 # install dependencies
@@ -14,4 +14,3 @@ $ yarn generate
 $ cp -r dist/* /var/www/html/.
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
