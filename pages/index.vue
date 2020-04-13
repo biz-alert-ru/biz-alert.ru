@@ -10,6 +10,26 @@
         </div>
         <img class="card-image" src="~assets/images/head-img.png"/>
       </section>
+      <div class="card stats-wrapper">
+        <div class="stat">
+          <div class="stat__count">
+            {{ businessCountAnimated }}
+          </div>
+          <div class="stat__name">
+            организаций<br/>
+            терпит бедствие
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat__count">
+            {{ jobsCountAnimated }}
+          </div>
+          <div class="stat__name">
+            человек<br/>
+            под угрозой увольнения
+          </div>
+        </div>
+      </div>
       <section class="card jumbotron">
         <div class="card-info" style="max-width: 100%">
           <h1>Эта карта — сигнал тревоги</h1>
@@ -161,7 +181,7 @@
             <el-form-item label="Количество рабочих мест под угрозой сокращения" prop="jobs_count">
               <el-input-number v-model="form.jobs_count" :min="1"></el-input-number>
             </el-form-item>
-            <el-form-item label="Что случилось?" prop="description">
+            <el-form-item label="Что могло бы вам помочь?" prop="description">
               <el-input type="textarea" v-model="form.description"></el-input>
             </el-form-item>
           </el-form>
@@ -186,6 +206,10 @@
             <div class="label">Количество рабочих мест под угрозой сокращения</div>
             <div class="text">{{ org.jobs_count }}</div>
           </div>
+          <div v-show="org.description.length > 0" class="info">
+            <div class="label">Что может помочь</div>
+            <div class="text">{{ org.description }}</div>
+          </div>
         </div>
         <div slot="footer">
           <span></span>
@@ -208,8 +232,8 @@
 </template>
 
 <script>
+  import gsap from 'gsap';
   import Modal from "../components/Modal";
-
   export default {
     name: 'index',
     components: {Modal},
@@ -232,7 +256,7 @@
             { required: true, message: 'Укажите количество', trigger: 'change' }
           ],
           description: [
-            { required: false, message: 'Опишите ситуацию', trigger: 'change' }
+            { required: true, message: 'Напишите, что может вам помочь', trigger: 'change' }
           ],
           problems: [
             { type: 'array', required: true, message: 'Напишите с какими проблемами вы столкнулись', trigger: 'blur' }
@@ -285,13 +309,29 @@
         infoModal: false,
         signModal: false,
         ymaps: null,
-        map: null
+        map: null,
+        bcTween: 1,
+        jcTween: 1
       }
     },
     async created() {
       this.fetchData()
     },
     computed: {
+      businessCountAnimated: function() {
+        return this.bcTween.toFixed(0);
+      },
+      jobsCountAnimated: function() {
+        return this.jcTween.toFixed(0);
+      },
+      businessCount() {
+        return this.placemarkData.length || 1
+      },
+      jobsCount() {
+        return this.placemarkData.reduce((sum, a) => {
+          return sum + a.jobs_count
+        }, 0)
+      },
       placemarks() {
         if (!this.map) {
           return []
@@ -313,6 +353,12 @@
       }
     },
     watch: {
+      businessCount (newValue) {
+        gsap.to(this.$data, { duration: 2, bcTween: newValue });
+      },
+      jobsCount (newValue) {
+        gsap.to(this.$data, { duration: 2, jcTween: newValue });
+      },
       async map() {
         this.map.events.add('click', async (e) => {
           let coords = e.get('coords');
@@ -410,6 +456,26 @@
       .card-info
         max-width: 460px
       margin-top: 60px
+  .stats-wrapper
+    margin-top: 60px
+    display: flex
+    justify-content: space-around
+    flex-direction: row
+    align-items: center
+    .stat
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: center
+      text-align: center
+      &__count
+        font-size: 36px
+        font-weight: bold
+      &__name
+        text-align: center
+        font-size: 24px
+    @include mobile
+      flex-direction: column
   .footer
     text-align: center
     font-size: 18px
@@ -629,6 +695,8 @@
       max-width: 775px
       margin-bottom: 30px
     width: 100vw
+    @include desktop
+      width: 80vw
     min-height: 660px
     border-radius: 25px
     padding: 20px
@@ -641,6 +709,8 @@
       margin-left: -20px
       min-height: 50vh
   .business-map
+    @include desktop
+      width: 80vw
     width: 100vw
     border-radius: 25px
     height: 660px
