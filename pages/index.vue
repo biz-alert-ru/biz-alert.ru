@@ -45,7 +45,6 @@
           :coords="center"
           zoom="11"
           class="business-map"
-          :placemarks="placemarks"
           map-type="map"
           @map-was-initialized="map = $event"
         />
@@ -153,7 +152,7 @@
         <div slot="body">
           <el-form :model="form" :rules="rules" ref="ruleForm">
             <el-form-item label="Адрес" prop="address">
-              <el-input v-model="form.address"></el-input>
+              <el-input v-model="form.address" @change="updateCoords"></el-input>
             </el-form-item>
             <el-form-item label="Название" prop="name">
               <el-input v-model="form.name"></el-input>
@@ -181,7 +180,7 @@
             <el-form-item label="Количество рабочих мест под угрозой сокращения" prop="jobs_count">
               <el-input-number v-model="form.jobs_count" :min="1"></el-input-number>
             </el-form-item>
-            <el-form-item label="Что могло бы вам помочь?" prop="description">
+            <el-form-item label="Что случилось / Что могло бы вам помочь?" prop="description">
               <el-input type="textarea" v-model="form.description"></el-input>
             </el-form-item>
           </el-form>
@@ -207,7 +206,7 @@
             <div class="text">{{ org.jobs_count }}</div>
           </div>
           <div v-show="org.description.length > 0" class="info">
-            <div class="label">Что может помочь</div>
+            <div class="label">Что случилось / Что может помочь</div>
             <div class="text">{{ org.description }}</div>
           </div>
         </div>
@@ -311,7 +310,8 @@
         ymaps: null,
         map: null,
         bcTween: 1,
-        jcTween: 1
+        jcTween: 1,
+        isClustersSet: false
       }
     },
     async created() {
@@ -331,28 +331,15 @@
         return this.placemarkData.reduce((sum, a) => {
           return sum + a.jobs_count
         }, 0)
-      },
-      placemarks() {
-        if (!this.map) {
-          return []
-        }
-        return this.placemarkData.map((place) => {
-          return {
-            coords: place.coords,
-            properties: {
-              iconCaption: place.name
-            },
-            callbacks: {
-              click: async (e) => {
-                this.org = place
-                this.infoModal = true
-              }
-            }
-          }
-        })
       }
     },
     watch: {
+      placemarkData() {
+        if (!this.map) {
+          return
+        }
+        this.setClusters()
+      },
       businessCount (newValue) {
         gsap.to(this.$data, { duration: 2, bcTween: newValue });
       },
@@ -362,10 +349,21 @@
       async map() {
         this.map.events.add('click', async (e) => {
           let coords = e.get('coords');
-          this.form.coords = coords
-          this.center = coords
-          this.addModal = true
+          window.ymaps.geocode(coords).then((res) => {
+            let firstGeoObject = res.geoObjects.get(0) || ''
+            this.form.address = firstGeoObject.getAddressLine() || ''
+            this.form.coords = coords
+            this.center = coords
+            this.addModal = true
+          }).catch(() => {
+            this.form.coords = coords
+            this.center = coords
+            this.addModal = true
+          })
         })
+        if (this.placemarkData.length > 0) {
+          this.setClusters()
+        }
       }
     },
     mounted() {
@@ -377,6 +375,106 @@
       resetHeight();
     },
     methods: {
+      updateCoords() {
+        window.ymaps.geocode(this.form.address, {results: 1}).then((res) => {
+          let firstGeoObject = res.geoObjects.get(0)
+          const coords = firstGeoObject.geometry.getCoordinates()
+          this.form.coords = coords
+        })
+      },
+      setClusters() {
+        if (this.isClustersSet) {
+          return
+        }
+        const clusterer = new window.ymaps.Clusterer({
+          /**
+           * Через кластеризатор можно указать только стили кластеров,
+           * стили для меток нужно назначать каждой метке отдельно.
+           * @see https://api.yandex.ru/maps/doc/jsapi/2.1/ref/reference/option.presetStorage.xml
+           */
+          preset: 'islands#invertedBlueClusterIcons',
+          /**
+           * Ставим true, если хотим кластеризовать только точки с одинаковыми координатами.
+           */
+          groupByCoordinates: false,
+          /**
+           * Опции кластеров указываем в кластеризаторе с префиксом "cluster".
+           * @see https://api.yandex.ru/maps/doc/jsapi/2.1/ref/reference/ClusterPlacemark.xml
+           */
+          clusterDisableClickZoom: false,
+          clusterHideIconOnBalloonOpen: false,
+          geoObjectHideIconOnBalloonOpen: false
+        })
+        /**
+         * Функция возвращает объект, содержащий данные метки.
+         * Поле данных clusterCaption будет отображено в списке геообъектов в балуне кластера.
+         * Поле balloonContentBody - источник данных для контента балуна.
+         * Оба поля поддерживают HTML-разметку.
+         * Список полей данных, которые используют стандартные макеты содержимого иконки метки
+         * и балуна геообъектов, можно посмотреть в документации.
+         * @see https://api.yandex.ru/maps/doc/jsapi/2.1/ref/reference/GeoObject.xml
+         */
+        const getPointData = function (point) {
+          return {
+            balloonContentHeader: `<strong>${point.name}</strong>`,
+            balloonContentBody: `
+              <div class="info">
+                <div class="label">Адрес</div>
+                <div class="text">${point.address}</div>
+              </div>
+              <div class="info">
+                <div class="label">Список проблем</div>
+                <div class="text">${point.problems.join(', ')}</div>
+              </div>
+              <div class="info">
+                <div class="label">Количество рабочих мест под угрозой сокращения</div>
+                <div class="text">${point.jobs_count}</div>
+              </div>
+              <div class="info">
+                <div class="label">Что случилось / Что может помочь</div>
+                <div class="text">${point.description.length > 0 ? point.description : ' – '}</div>
+              </div>
+            `,
+            balloonContentFooter: '<strong></strong>',
+            clusterCaption: `<strong>${point.name}</strong>`
+          };
+        }
+        const getPointOptions = function () {
+          return {
+            preset: 'islands#blueIcon'
+          };
+        }
+        const geoObjects = []
+        let points = [
+          [55.831903,37.411961], [55.763338,37.565466], [55.763338,37.565466], [55.744522,37.616378], [55.780898,37.642889], [55.793559,37.435983], [55.800584,37.675638], [55.716733,37.589988], [55.775724,37.560840], [55.822144,37.433781], [55.874170,37.669838], [55.716770,37.482338], [55.780850,37.750210], [55.810906,37.654142], [55.865386,37.713329], [55.847121,37.525797], [55.778655,37.710743], [55.623415,37.717934], [55.863193,37.737000], [55.866770,37.760113], [55.698261,37.730838], [55.633800,37.564769], [55.639996,37.539400], [55.690230,37.405853], [55.775970,37.512900], [55.775777,37.442180], [55.811814,37.440448], [55.751841,37.404853], [55.627303,37.728976], [55.816515,37.597163], [55.664352,37.689397], [55.679195,37.600961], [55.673873,37.658425], [55.681006,37.605126], [55.876327,37.431744], [55.843363,37.778445], [55.875445,37.549348], [55.662903,37.702087], [55.746099,37.434113], [55.838660,37.712326], [55.774838,37.415725], [55.871539,37.630223], [55.657037,37.571271], [55.691046,37.711026], [55.803972,37.659610], [55.616448,37.452759], [55.781329,37.442781], [55.844708,37.748870], [55.723123,37.406067], [55.858585,37.484980]
+        ]
+        for(let place of this.placemarkData) {
+          geoObjects.push(new window.ymaps.Placemark(place.coords, getPointData(place), getPointOptions()))
+        }
+        /**
+         * Можно менять опции кластеризатора после создания.
+         */
+        clusterer.options.set({
+          gridSize: 80,
+          clusterDisableClickZoom: true
+        });
+
+        /**
+         * В кластеризатор можно добавить javascript-массив меток (не геоколлекцию) или одну метку.
+         * @see https://api.yandex.ru/maps/doc/jsapi/2.1/ref/reference/Clusterer.xml#add
+         */
+        clusterer.add(geoObjects);
+        this.map.geoObjects.add(clusterer);
+
+        /**
+         * Спозиционируем карту так, чтобы на ней были видны все объекты.
+         */
+
+        this.map.setBounds(clusterer.getBounds(), {
+          checkZoomRange: true
+        });
+        this.isClustersSet = true
+      },
       submitForm() {
         this.$refs.ruleForm.validate((valid) => {
           if (valid) {
