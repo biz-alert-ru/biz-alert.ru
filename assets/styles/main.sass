@@ -1,0 +1,321 @@
+.info
+  &:not(:last-child)
+    margin-bottom: 10px
+  .label
+    font-weight: bold
+  .wrap
+    width: 100%
+    max-width: 775px
+  @mixin mobile
+    @media (max-width: 768px)
+      @content
+  @mixin desktop
+    @media (min-width: 769px)
+      @content
+  @mixin card
+    background: #F8F8F9
+    padding: 30px 40px
+    border-radius: 30px
+    @include mobile
+      padding: 20px !important
+  .card-mini
+    @include card
+  .only-mobile
+    @include desktop
+      display: none
+  .only-desktop
+    @include mobile
+      display: none !important
+  .jumbotron
+    @include mobile
+      &:nth-child(2)
+        margin-top: 60px
+    @include desktop
+      .card-info
+        max-width: 460px
+      margin-top: 60px
+  .stats-wrapper
+    margin-top: 60px
+    display: flex
+    justify-content: space-around
+    flex-direction: row
+    align-items: center
+    .stat
+      display: flex
+      flex-direction: column
+      align-items: center
+      justify-content: center
+      text-align: center
+      &__count
+        font-size: 36px
+        font-weight: bold
+      &__name
+        text-align: center
+        font-size: 24px
+    @include mobile
+      flex-direction: column
+  .footer
+    text-align: center
+    font-size: 18px
+    margin-top: 110px
+    @include mobile
+      font-size: 16px
+      margin-top: 60px
+  .el-scrollbar
+    > .el-scrollbar__bar
+      opacity: 1
+  .sign-button
+    display: flex
+    justify-content: center
+    align-items: center
+    text-decoration: none
+    border: 1.5px solid #052DFF
+    box-sizing: border-box
+    border-radius: 30px
+    padding: 15px 25px
+    background: rgba(0,0,0,0)
+    font-weight: bold
+    font-size: 16px
+    transition: all 0.2s ease
+    cursor: pointer
+    &:hover
+      background: #052DFF
+      color: #fff
+  .quotes
+    display: flex
+    flex-direction: column
+    align-items: center
+    .quote
+      &:nth-child(2n)
+        flex-direction: row-reverse
+        .quote__avatar
+          margin-left: 30px
+          margin-right: 0
+          @include mobile
+            margin-left: 7px
+            margin-right: 0
+      display: flex
+      &__text
+        margin-top: 10px
+        line-height: 150%
+        font-size: 18px
+        @include mobile
+          font-size: 16px
+      &__name
+        font-size: 36px
+        font-weight: bold
+        @include mobile
+          font-size: 22px
+      &__position
+        font-weight: bold
+      &__avatar
+        width: 180px
+        height: 180px
+        margin-right: 30px
+        @include mobile
+          margin-right: 7px
+          width: 40px
+          height: 40px
+      &__card
+        @include desktop
+          max-width: 620px
+        @include card
+    .quote:not(:last-child)
+      margin-bottom: 60px
+  .donate-cards
+    padding: 30px 40px !important
+    display: grid !important
+    gap: 60px
+    grid-template-columns: 75px 1fr 1fr
+    font-size: 24px
+    align-items: center
+    .card-num__name
+      font-weight: bold
+    @include mobile
+      align-items: flex-start !important
+      gap: 15px
+      font-size: 18px
+      grid-template-columns: 1fr
+      padding: 20px !important
+  .contacts
+    @include desktop
+      padding: 60px 38px 30px !important
+      h1
+        margin-bottom: 0 !important
+  .donate
+    @include mobile
+      margin-top: 60px
+    @include desktop
+      padding: 60px 38px 30px !important
+  .contacts
+    @include mobile
+      margin-top: 60px
+  .contact-card
+    display: grid
+    grid-template-columns: 140px 1fr 145px
+    align-items: center
+    gap: 60px
+    max-width: 858px
+    font-size: 18px
+    .contact__avatar
+      align-items: center
+      @include mobile
+        img
+          width: 69px
+          height: 69px
+          margin-right: 13px
+      display: flex
+    .contact__list
+      a
+        color: #052DFF !important
+        text-decoration: none
+      color: #052DFF !important
+      font-weight: bold
+      display: grid
+      gap: 15px
+      grid-template-columns: 1fr
+      @include mobile
+        grid-template-columns: 1fr 1fr
+    .contact__text
+      line-height: 150%
+      @include desktop
+        margin-top: 10px
+    .contact__name
+      @include mobile
+        font-size: 22px
+      font-size: 36px
+    .contact__name, .contact__position
+      font-weight: bold
+    @include card
+    @include mobile
+      grid-template-columns: 1fr
+      font-size: 16px
+      gap: 20px
+  .card
+    &.supporting
+      @include desktop
+        padding: 60px 38px 60px !important
+      .card-info
+        max-width: 100% !important
+        h1
+          margin-bottom: 0px !important
+      @include mobile
+        h1
+          margin-top: 30px
+          margin-bottom: 30px
+        flex-direction: column-reverse
+    &.text
+      flex-direction: column
+      p
+        width: 100%
+        margin-bottom: 30px
+        font-size: 18px
+        line-height: 150%
+        @include mobile
+          font-size: 16px
+        &:last-child
+          margin-bottom: 0
+    &.petition
+      align-items: center
+      .card-info
+        @include desktop
+          h1
+            margin-bottom: 0 !important
+          max-width: 540px
+      .card-image
+        max-width: 140px
+    .card-image
+      max-width: 260px
+      @include mobile
+        max-width: 250px
+        margin-top: 30px
+
+    &.card-grey
+      background: #F8F8F9
+    &-info
+      &__text
+        font-size: 18px
+        line-height: 150%
+        @include mobile
+          font-size: 16px
+      h1
+        @include mobile
+          font-size: 36px
+        font-size: 45px
+        line-height: 120%
+        font-weight: bold
+        margin-bottom: 30px
+    border-radius: 30px
+    width: 100%
+    padding: 60px 80px
+    display: flex
+    justify-content: space-between
+    align-items: center
+    text-align: left
+    @include mobile
+      padding: 20px
+      flex-direction: column
+  .map-tip
+    margin-top: 30px
+    font-size: 24px
+    margin-bottom: 0px !important
+  .map-container
+    .map-title
+      font-weight: bold
+    .map-title, .map-tip
+      @include mobile
+        font-size: 18px
+        max-width: calc(100vw - 20px)
+        padding: 0 30px
+      font-size: 24px
+      text-align: left
+      width: 100%
+      max-width: 775px
+      margin-bottom: 30px
+    width: 100vw
+    @include desktop
+      width: 80vw
+    min-height: 660px
+    border-radius: 25px
+    padding: 20px
+    background: #fff
+    margin-top: 15px
+    display: flex
+    flex-direction: column
+    align-items: center
+    @media (max-width: 768px)
+      margin-left: -20px
+      min-height: 50vh
+  .business-map
+    @include desktop
+      width: 80vw
+    width: 100vw
+    border-radius: 25px
+    height: 660px
+    margin-top: 0 !important
+    @media (max-width: 768px)
+      height: 50vh
+  .el-form-item__label
+    text-align: left !important
+    color: #000 !important
+    font-weight: bold
+  .el-input-number
+    width: 150px !important
+  .el-button--primary
+    background: #052DFF !important
+    border-color: #052DFF !important
+    &:hover
+      opacity: 0.7
+  .el-select .el-input.is-focus .el-input__inner
+    border-color: #052DFF !important
+  .el-select-dropdown.is-multiple .el-select-dropdown__item.selected
+    color: #052DFF !important
+  .el-input__inner, .el-tag.el-tag--info, .el-select-dropdown__item
+    color: #000 !important
+    &:focus
+      border-color: #052DFF !important
+  .container
+    width: calc(100vw - 20px)
+    margin: 0 auto
+    max-width: 950px
+    padding: 10px
