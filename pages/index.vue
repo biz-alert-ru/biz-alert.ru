@@ -145,6 +145,48 @@
           <div class="card_numm__num">4893 4702 7697 0339</div>
         </div>
       </div>
+      <section class="card jumbotron media">
+        <div class="card-info" style="width: 100%; display: flex; align-items: center;">
+          <h1>СМИ о проекте</h1>
+          <img class="only-desktop" style="width: 76px; margin-left: 40px" src="~assets/images/newspaper.png"/>
+        </div>
+        <img class="card-image only-mobile" style="max-width: 150px" src="~assets/images/newspaper.png"/>
+      </section>
+      <section class="media-cards">
+        <a href="https://meduza.io/feature/2020/04/14/byvshiy-sotrudnik-minfina-sozdal-kartu-rossiyskogo-biznesa-kotoryy-terpit-bedstvie" target="_blank" class="media-card">
+          <img src="/media-logos/meduza.svg" class="media-card__logo"/>
+          <div class="media-card__heading">
+            Бывший сотрудник Минфина создал карту российского бизнеса, который терпит бедствие
+          </div>
+        </a>
+        <a href="https://tvrain.ru/teleshow/vechernee_shou/karta_biznesa-506931/" target="_blank" class="media-card">
+          <img src="/media-logos/tvrain.svg" class="media-card__logo"/>
+          <div class="media-card__heading">
+            Карта умирающего бизнеса:<br>
+            как предприниматели по всей России пытаются достучаться до власти
+          </div>
+        </a>
+        <a href="https://novayagazeta.ru/articles/2020/04/15/84904-ubivat-ekonomiku-goroda-neratsionalno" target="_blank" class="media-card">
+          <img src="/media-logos/novayagazeta.png" class="media-card__logo"/>
+          <div class="media-card__heading">
+            «Убивать экономику города нерационально»<br>
+            Интервью создателя интерактивной карты «Бизнес терпит бедствие» Данила Махницкого
+          </div>
+        </a>
+        <a href="https://secretmag.ru/news/predstavlena-karta-razoreniya-rossiiskogo-biznesa.htm" target="_blank" class="media-card">
+          <img src="/media-logos/secretmag.svg" class="media-card__logo"/>
+          <div class="media-card__heading">
+            Представлена карта разорения российского бизнеса
+          </div>
+        </a>
+        <a href="https://meduza.io/episodes/2020/04/15/danil-mahnitskiy-sozdal-kartu-biznesa-terpyaschego-bedstvie-on-uveren-chto-predprinimateli-ob-edinyatsya-chtoby-pred-yavit-trebovaniya-pravitelstvu" target="_blank" class="media-card">
+          <img src="/media-logos/meduza.svg" class="media-card__logo"/>
+          <div class="media-card__heading">
+            Данил Махницкий создал карту бизнеса, терпящего бедствие.<br>
+            Он уверен, что предприниматели объединятся, чтобы предъявить требования правительству
+          </div>
+        </a>
+      </section>
       <div class="footer">
         Карта бизнеса, терпящего бедствие © 2020 <br/><br/>
         <span>Сделать карту тонущего бизнеса предложил предприниматель <span style="white-space: nowrap">Михаил Зуйков</span></span>
@@ -801,5 +843,44 @@
     margin: 0 auto
     max-width: 950px
     padding: 10px
+  .media
+    @include desktop
+      padding: 60px 38px 0 !important
+      h1
+        margin-bottom: 0 !important
+  .media
+    @include mobile
+      margin-top: 60px
+
+  .media-cards
+    width: 100%
+    display: flex
+    padding: 60px 38px 30px !important
+    flex-wrap: wrap
+    justify-content: space-between
+    @include mobile
+      padding: 0!important
+      flex-direction: column
+
+  .media-card
+    width: calc(50% - 15px)
+    background: #F8F8F9
+    border-radius: 30px
+    text-decoration: none
+    color: inherit
+    margin: 0 0 30px
+    @include mobile
+      width: 100%
+    &__logo
+      height: 60px
+      padding: 18px 30px 0
+      @include mobile
+        height: 50px
+    &__heading
+      padding: 18px 30px
+      font-weight: bold
+      font-size: 22px
+      @include mobile
+        font-size: 18px
 
 </style>
