@@ -148,9 +148,9 @@
       <section class="card jumbotron media">
         <div class="card-info" style="width: 100%; display: flex; align-items: center;">
           <h1>СМИ о проекте</h1>
-          <img class="only-desktop" style="width: 76px; margin-left: 40px" src="~assets/images/newspaper.png"/>
+          <img class="only-desktop" style="width: 76px; margin-left: 40px" src="~assets/images/tv.png"/>
         </div>
-        <img class="card-image only-mobile" style="max-width: 150px" src="~assets/images/newspaper.png"/>
+        <img class="card-image only-mobile" style="max-width: 150px" src="~assets/images/tv.png"/>
       </section>
       <section class="media-cards">
         <a href="https://meduza.io/feature/2020/04/14/byvshiy-sotrudnik-minfina-sozdal-kartu-rossiyskogo-biznesa-kotoryy-terpit-bedstvie" target="_blank" class="media-card">
@@ -863,24 +863,26 @@
       flex-direction: column
 
   .media-card
-    width: calc(50% - 15px)
+    width: calc(50% - 16px)
     background: #F8F8F9
     border-radius: 30px
     text-decoration: none
     color: inherit
     margin: 0 0 30px
+    padding: 30px 40px
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0)
+    transition: box-shadow .5s
+    &:hover, &:active
+      box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.1)
     @include mobile
       width: 100%
     &__logo
-      height: 60px
-      padding: 18px 30px 0
+      height: 32px
       @include mobile
-        height: 50px
+        height: 24px
     &__heading
-      padding: 18px 30px
-      font-weight: bold
-      font-size: 22px
-      @include mobile
-        font-size: 18px
-
+      font-size: 18px
+      line-height: 1.5
+      margin: 16px 0 0
+      height: 136px
 </style>
