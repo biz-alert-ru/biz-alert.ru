@@ -186,6 +186,13 @@
             Он уверен, что предприниматели объединятся, чтобы предъявить требования правительству
           </div>
         </a>
+        <a href="https://www.vedomosti.ru/management/articles/2020/04/16/828281-zhivetsya-individualnim" target="_blank" class="media-card">
+            <img src="/media-logos/vedomosti.svg" class="media-card__logo"/>
+            <div class="media-card__heading">
+                Как живется индивидуальным предпринимателям в кризис
+            </div>
+        </a>
+
       </section>
       <div class="footer">
         Карта бизнеса, терпящего бедствие © 2020 <br/><br/>
