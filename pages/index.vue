@@ -170,7 +170,7 @@
           <img src="/media-logos/novayagazeta.png" class="media-card__logo"/>
           <div class="media-card__heading">
             «Убивать экономику города нерационально»<br>
-            Интервью создателя интерактивной карты «Бизнес терпит бедствие» Данила Махницкого
+            Интервью создателя интерактивной карты «Бизнес терпит бедствие»
           </div>
         </a>
         <a href="https://secretmag.ru/news/predstavlena-karta-razoreniya-rossiiskogo-biznesa.htm" target="_blank" class="media-card">
@@ -179,11 +179,11 @@
             Представлена карта разорения российского бизнеса
           </div>
         </a>
-        <a href="https://meduza.io/episodes/2020/04/15/danil-mahnitskiy-sozdal-kartu-biznesa-terpyaschego-bedstvie-on-uveren-chto-predprinimateli-ob-edinyatsya-chtoby-pred-yavit-trebovaniya-pravitelstvu" target="_blank" class="media-card">
-          <img src="/media-logos/meduza.svg" class="media-card__logo"/>
+        <a href="https://www.kommersant.ru/doc/4325761" target="_blank" class="media-card">
+          <img src="/media-logos/kommersant.svg" class="media-card__logo"/>
           <div class="media-card__heading">
-            Данил Махницкий создал карту бизнеса, терпящего бедствие.<br>
-            Он уверен, что предприниматели объединятся, чтобы предъявить требования правительству
+            Помощь малому бизнесу не придет.<br>
+            Какие компании не могут претендовать на поддержку государства
           </div>
         </a>
         <a href="https://www.vedomosti.ru/management/articles/2020/04/16/828281-zhivetsya-individualnim" target="_blank" class="media-card">
