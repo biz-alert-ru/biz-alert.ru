@@ -1,6 +1,14 @@
-const webpack = require('webpack')
+const webpack = require('webpack');
+const yandexApiKey = process.env.YANDEX_API_KEY;
+const api_url = process.env.API_URL;
+const firebaseParams = require(process.env.FIREBASE_KEY_PATH);
 
 export default {
+  env: {
+    yandexApiKey: yandexApiKey,
+    firebaseParams: firebaseParams,
+    apiUrl: api_url
+  },
   mode: 'universal',
   /*
   ** Headers of the page
@@ -75,15 +83,7 @@ export default {
     [
       '@nuxtjs/firebase',
       {
-        config: {
-          apiKey: "",
-          authDomain: "",
-          databaseURL: "",
-          projectId: "",
-          storageBucket: "",
-          messagingSenderId: "",
-          appId: ""
-        },
+        config: firebaseParams,
         services:  {
           auth: true,
           firestore: {
@@ -95,9 +95,9 @@ export default {
       }
     ],
     ['vue-yandex-maps/nuxt', {
-      apiKey: '',
+      apiKey: yandexApiKey,
       lang: 'ru_RU',
-      version: '2.1.76'
+      version: '2.1'
     }],
   ],
   /*

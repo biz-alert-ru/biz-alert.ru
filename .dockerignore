@@ -7,7 +7,3 @@ npm-debug.log
 .nuxt
 
 dist
-
-key.json 
-
-.env

@@ -50,7 +50,8 @@
           class="business-map"
           map-type="map"
           @map-was-initialized="map = $event"
-        />
+        >
+        </yandex-map>
         <div class="map-tip wrap"><strong>Расскажите об этой инициативе своим знакомым предпринимателям.</strong> Чтобы наши голоса услышали, их должно быть много! </div>
       </div>
       <section class="card jumbotron petition">
@@ -236,6 +237,8 @@
 <script>
   import gsap from 'gsap';
   import Modal from "../components/Modal";
+
+  const apiUrl = process.env.apiUrl;
   export default {
     name: 'index',
     components: {Modal},
@@ -467,7 +470,7 @@
         });
       },
       async fetchData() {
-        let data = await fetch('/list')
+        let data = await fetch(apiUrl + '/list', {mode: 'no-cors'})
         let placemarkData = []
         if (data.ok) {
           placemarkData = await data.json();
