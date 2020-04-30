@@ -321,7 +321,12 @@
       }
     },
     async created() {
-      this.fetchData()
+      try{ 
+        this.fetchData()
+      } 
+      catch(err) {
+        console.error(err)
+      }
     },
     computed: {
       businessCountAnimated: function() {
@@ -470,12 +475,12 @@
         });
       },
       async fetchData() {
-        let data = await fetch(apiUrl + '/list', {mode: 'no-cors'})
+        const response = await fetch(apiUrl + '/list')
         let placemarkData = []
-        if (data.ok) {
-          placemarkData = await data.json();
+        placemarkData = response.json()
+        if (Array.isArray(placemarkData) && placemarkData.length) {
+          this.placemarkData = placemarkData
         }
-        this.placemarkData = placemarkData
       }
     }
   }

@@ -1,13 +1,13 @@
 const webpack = require('webpack');
 const yandexApiKey = process.env.YANDEX_API_KEY;
-const api_url = process.env.API_URL;
+const apiUrl = process.env.API_URL;
 const firebaseParams = require(process.env.FIREBASE_KEY_PATH);
 
 export default {
   env: {
     yandexApiKey: yandexApiKey,
     firebaseParams: firebaseParams,
-    apiUrl: api_url
+    apiUrl: apiUrl
   },
   mode: 'universal',
   /*
