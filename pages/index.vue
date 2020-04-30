@@ -397,6 +397,10 @@
         })
 
         const getPointData = function (point) {
+          let description = ' – '
+          if (point.hasOwnProperty('description') && Boolean(point['description'])){
+              description = point.description;
+          }
           return {
             balloonContentHeader: `<strong>${point.name}</strong>`,
             balloonContentBody: `
@@ -414,7 +418,7 @@
               </div>
               <div class="info">
                 <div class="label">Что случилось / Что может помочь</div>
-                <div class="text">${point.description.length > 0 ? point.description : ' – '}</div>
+                <div class="text">${description}</div>
               </div>
             `,
             balloonContentFooter: '<strong></strong>',
@@ -477,7 +481,7 @@
       async fetchData() {
         const response = await fetch(apiUrl + '/list')
         let placemarkData = []
-        placemarkData = response.json()
+        placemarkData = await response.json()
         if (Array.isArray(placemarkData) && placemarkData.length) {
           this.placemarkData = placemarkData
         }
