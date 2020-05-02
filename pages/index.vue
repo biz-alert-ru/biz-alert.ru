@@ -19,15 +19,29 @@
       </div>
     </div>
     <div class="page">
-      <section class="card card-grey jumbotron">
-        <div class="card-info">
-          <h1>Бизнес терпит бедствие</h1>
+      <div class="map-container" id="map">
+        <div class="map-title">Кликните на карту, чтобы отметить свой бизнес</div>
+        <yandex-map
+          :coords="center"
+          zoom="3"
+          :options="{
+            minZoom: 3
+          }"
+          class="business-map"
+          map-type="map"
+          @map-was-initialized="map = $event"
+        />
+        
+      </div>
+      <section class="card jumbotron" id="signal">
+        <div class="card-info" style="max-width: 100%" >
+          <h1>Эта карта — сигнал тревоги</h1>
           <div class="card-info__text">
-            Мы просим государство помочь предпринимателям, несущим убытки. Если этого не сделать прямо сейчас, после окончания карантина <strong>Россия может остаться вообще без бизнеса.</strong>
+            Мы призываем предпринимателей, которые терпят крах из-за карантина, размещать на ней метки с обозначением своего бизнеса. С помощью этой карты мы хотим показать масштаб бедствия и обратить внимание властей на проблему гибели малого, среднего, да и крупного бизнеса. Если вам нечем платить зарплату сотрудникам, нечем платить за аренду и по кредитным обязательствам, если вы стоите на грани банкротства — <strong>не молчите, расскажите о своей ситуации</strong>. Если ваш бизнес уже погиб из-за карантина — заявите об этом.
           </div>
         </div>
-        <img class="card-image" src="~assets/images/head-img.png"/>
       </section>
+      <div class="map-tip wrap"><strong>Расскажите об этой инициативе своим знакомым предпринимателям.</strong> Чтобы наши голоса услышали, их должно быть много! </div>
       <div class="card stats-wrapper">
         <div class="stat">
           <div class="stat__count">
@@ -48,29 +62,18 @@
           </div>
         </div>
       </div>
-      <section class="card jumbotron">
-        <div class="card-info" style="max-width: 100%">
-          <h1>Эта карта — сигнал тревоги</h1>
+      <section class="card card-grey jumbotron">
+        <div class="card-info">
+          <h1>Бизнес терпит бедствие</h1>
           <div class="card-info__text">
-            Мы призываем предпринимателей, которые терпят крах из-за карантина, размещать на ней метки с обозначением своего бизнеса. С помощью этой карты мы хотим показать масштаб бедствия и обратить внимание властей на проблему гибели малого, среднего, да и крупного бизнеса. Если вам нечем платить зарплату сотрудникам, нечем платить за аренду и по кредитным обязательствам, если вы стоите на грани банкротства — <strong>не молчите, расскажите о своей ситуации</strong>. Если ваш бизнес уже погиб из-за карантина — заявите об этом.
+            Мы просим государство помочь предпринимателям, несущим убытки. Если этого не сделать прямо сейчас, после окончания карантина <strong>Россия может остаться вообще без бизнеса.</strong>
           </div>
         </div>
+        <img class="card-image" src="~assets/images/head-img.png"/>
       </section>
+      
 
-      <div class="map-container" id="map">
-        <div class="map-title">Кликните на карту, чтобы отметить свой бизнес</div>
-        <yandex-map
-          :coords="center"
-          zoom="3"
-          :options="{
-            minZoom: 3
-          }"
-          class="business-map"
-          map-type="map"
-          @map-was-initialized="map = $event"
-        />
-        <div class="map-tip wrap"><strong>Расскажите об этой инициативе своим знакомым предпринимателям.</strong> Чтобы наши голоса услышали, их должно быть много! </div>
-      </div>
+      
       <section class="card jumbotron petition" id="petition">
         <div class="card-info only-desktop">
           <h1>Петиция в поддержку бизнеса</h1>
@@ -835,6 +838,7 @@
     margin-top: 30px
     font-size: 24px
     margin-bottom: 0px !important
+    text-align: center
   .map-container
     .map-title
       font-weight: bold
@@ -844,7 +848,7 @@
         max-width: calc(100vw - 20px)
         padding: 0 30px
       font-size: 24px
-      text-align: left
+      text-align: center
       width: 100%
       max-width: 775px
       margin-bottom: 30px
@@ -937,4 +941,6 @@
       line-height: 1.5
       margin: 16px 0 0
       height: 136px
+  #signal
+   margin-top: 0px 
 </style>
