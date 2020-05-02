@@ -1,5 +1,23 @@
 <template>
-  <div class="container">
+  <div class="container" id="main-container">
+    <div id="menu">
+      <h1>Меню</h1>
+      <div class="menu-block">
+        <a href="#map" class="menu-link">Карта</a><br>
+      </div>
+      <div class="menu-block">
+        <a href="#petition"  class="menu-link">Петиция</a><br>
+      </div>
+      <div class="menu-block">
+        <a href="#supporting" class="menu-link" >Нас поддержали</a><br>
+      </div>
+      <div class="menu-block">
+        <a href="#contacts" class="menu-link"> Контакты</a><br>
+      </div>
+      <div class="menu-block">
+        <a href="#donate" class="menu-link"> Поддержать проект</a>
+      </div>
+    </div>
     <div class="page">
       <section class="card card-grey jumbotron">
         <div class="card-info">
@@ -39,7 +57,7 @@
         </div>
       </section>
 
-      <div class="map-container">
+      <div class="map-container" id="map">
         <div class="map-title">Кликните на карту, чтобы отметить свой бизнес</div>
         <yandex-map
           :coords="center"
@@ -53,7 +71,7 @@
         />
         <div class="map-tip wrap"><strong>Расскажите об этой инициативе своим знакомым предпринимателям.</strong> Чтобы наши голоса услышали, их должно быть много! </div>
       </div>
-      <section class="card jumbotron petition">
+      <section class="card jumbotron petition" id="petition">
         <div class="card-info only-desktop">
           <h1>Петиция в поддержку бизнеса</h1>
         </div>
@@ -72,7 +90,7 @@
         <p><strong>Уже больше 270.000 человек с нами.</strong></p>
         <div style="text-align: center"><a target="_blank" style="text-decoration: none;" href="https://www.change.org/obnulenienalogov"><button class="sign-button" >Подписать на Change.org <img style="margin-left: 5px;" src="~assets/images/hand.png"/></button></a></div>
       </section>
-      <section class="card jumbotron supporting">
+      <section class="card jumbotron supporting" id="supporting">
         <div class="card-info" style="display: flex; align-items: center;">
           <h1>Нас поддержали</h1>
           <img class="only-desktop" style="width: 76px; margin-left: 40px" src="~assets/images/megaphone.png"/>
@@ -97,7 +115,7 @@
           </div>
         </div>
       </section>
-      <section class="card jumbotron contacts" style="padding-bottom: 0">
+      <section class="card jumbotron contacts" id="contacts" style="padding-bottom: 0">
         <div class="card-info" style="width: 100%">
           <h1>Контакты</h1>
         </div>
@@ -126,7 +144,7 @@
           <a target="_blank" href="https://tlgg.ru/d_makhn">Телеграм</a>
         </div>
       </div>
-      <section class="card jumbotron donate">
+      <section class="card jumbotron donate" id="donate">
         <div class="card-info" style="max-width: 100%">
           <h1>Поддержать проект</h1>
           <div class="card-info__text">
@@ -529,6 +547,8 @@
 
 <style lang="sass">
   @import "../assets/styles/mixins.scss"
+  html
+      scroll-behavior: smooth
   .info
     &:not(:last-child)
       margin-bottom: 10px
@@ -540,15 +560,40 @@
   @mixin mobile
     @media (max-width: 768px)
       @content
-  @mixin desktop
+  @mixin desktop 
     @media (min-width: 769px)
       @content
+  @mixin desktop-wide
+    @media (min-width: 1920px)
+      @content
   @mixin card
-    background: #F8F8F9
+    background: #F0F0F0
     padding: 30px 40px
     border-radius: 30px
     @include mobile
       padding: 20px !important
+  #menu
+    position: fixed
+    right: 5px
+    width: 10rem
+    z-index: 25
+    padding-bottom: 0.5rem
+    margin-top: 1rem
+    display: none
+    border-radius: 25px
+    background: #F0F0F0
+    padding: 15px
+    @include desktop-wide
+      display: block
+  .menu-block
+    padding-top: 0.5rem
+  .menu-link
+    text-decoration: none
+    color: black
+  .menu-link:visited
+    color: black
+  .menu-link:hover
+    text-decoration: underline
   .card-mini
     @include card
   .only-mobile
@@ -762,7 +807,7 @@
         margin-top: 30px
 
     &.card-grey
-      background: #F8F8F9
+      background: #F0F0F0
     &-info
       &__text
         font-size: 18px
@@ -871,7 +916,7 @@
 
   .media-card
     width: calc(50% - 16px)
-    background: #F8F8F9
+    background: #F0F0F0
     border-radius: 30px
     text-decoration: none
     color: inherit
