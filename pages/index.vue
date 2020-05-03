@@ -566,9 +566,6 @@
   @mixin desktop 
     @media (min-width: 769px)
       @content
-  @mixin desktop-wide
-    @media (min-width: 1920px)
-      @content
   @mixin card
     background: #F0F0F0
     padding: 30px 40px
@@ -586,7 +583,7 @@
     border-radius: 25px
     background: #F0F0F0
     padding: 15px
-    @include desktop-wide
+    @include desktop
       display: block
   .menu-block
     padding-top: 0.5rem
