@@ -1,15 +1,47 @@
 <template>
-  <div class="container">
+  <div class="container" id="main-container">
+    <div id="menu">
+      <h1>Меню</h1>
+      <div class="menu-block">
+        <a href="#map" class="menu-link">Карта</a><br>
+      </div>
+      <div class="menu-block">
+        <a href="#petition"  class="menu-link">Петиция</a><br>
+      </div>
+      <div class="menu-block">
+        <a href="#supporting" class="menu-link" >Нас поддержали</a><br>
+      </div>
+      <div class="menu-block">
+        <a href="#contacts" class="menu-link"> Контакты</a><br>
+      </div>
+      <div class="menu-block">
+        <a href="#donate" class="menu-link"> Поддержать проект</a>
+      </div>
+    </div>
     <div class="page">
-      <section class="card card-grey jumbotron">
-        <div class="card-info">
-          <h1>Бизнес терпит бедствие</h1>
+      <div class="map-container" id="map">
+        <div class="map-title">Кликните на карту, чтобы отметить свой бизнес</div>
+        <yandex-map
+          :coords="center"
+          zoom="3"
+          :options="{
+            minZoom: 3
+          }"
+          class="business-map"
+          map-type="map"
+          @map-was-initialized="map = $event"
+        />
+        
+      </div>
+      <section class="card jumbotron" id="signal">
+        <div class="card-info" style="max-width: 100%" >
+          <h1>Эта карта — сигнал тревоги</h1>
           <div class="card-info__text">
-            Мы просим государство помочь предпринимателям, несущим убытки. Если этого не сделать прямо сейчас, после окончания карантина <strong>Россия может остаться вообще без бизнеса.</strong>
+            Мы призываем предпринимателей, которые терпят крах из-за карантина, размещать на ней метки с обозначением своего бизнеса. С помощью этой карты мы хотим показать масштаб бедствия и обратить внимание властей на проблему гибели малого, среднего, да и крупного бизнеса. Если вам нечем платить зарплату сотрудникам, нечем платить за аренду и по кредитным обязательствам, если вы стоите на грани банкротства — <strong>не молчите, расскажите о своей ситуации</strong>. Если ваш бизнес уже погиб из-за карантина — заявите об этом.
           </div>
         </div>
-        <img class="card-image" src="~assets/images/head-img.png"/>
       </section>
+      <div class="map-tip wrap"><strong>Расскажите об этой инициативе своим знакомым предпринимателям.</strong> Чтобы наши голоса услышали, их должно быть много! </div>
       <div class="card stats-wrapper">
         <div class="stat">
           <div class="stat__count">
@@ -30,30 +62,19 @@
           </div>
         </div>
       </div>
-      <section class="card jumbotron">
-        <div class="card-info" style="max-width: 100%">
-          <h1>Эта карта — сигнал тревоги</h1>
+      <section class="card card-grey jumbotron">
+        <div class="card-info">
+          <h1>Бизнес терпит бедствие</h1>
           <div class="card-info__text">
-            Мы призываем предпринимателей, которые терпят крах из-за карантина, размещать на ней метки с обозначением своего бизнеса. С помощью этой карты мы хотим показать масштаб бедствия и обратить внимание властей на проблему гибели малого, среднего, да и крупного бизнеса. Если вам нечем платить зарплату сотрудникам, нечем платить за аренду и по кредитным обязательствам, если вы стоите на грани банкротства — <strong>не молчите, расскажите о своей ситуации</strong>. Если ваш бизнес уже погиб из-за карантина — заявите об этом.
+            Мы просим государство помочь предпринимателям, несущим убытки. Если этого не сделать прямо сейчас, после окончания карантина <strong>Россия может остаться вообще без бизнеса.</strong>
           </div>
         </div>
+        <img class="card-image" src="~assets/images/head-img.png"/>
       </section>
+      
 
-      <div class="map-container">
-        <div class="map-title">Кликните на карту, чтобы отметить свой бизнес</div>
-        <yandex-map
-          :coords="center"
-          zoom="3"
-          :options="{
-            minZoom: 3
-          }"
-          class="business-map"
-          map-type="map"
-          @map-was-initialized="map = $event"
-        />
-        <div class="map-tip wrap"><strong>Расскажите об этой инициативе своим знакомым предпринимателям.</strong> Чтобы наши голоса услышали, их должно быть много! </div>
-      </div>
-      <section class="card jumbotron petition">
+      
+      <section class="card jumbotron petition" id="petition">
         <div class="card-info only-desktop">
           <h1>Петиция в поддержку бизнеса</h1>
         </div>
@@ -72,7 +93,7 @@
         <p><strong>Уже больше 270.000 человек с нами.</strong></p>
         <div style="text-align: center"><a target="_blank" style="text-decoration: none;" href="https://www.change.org/obnulenienalogov"><button class="sign-button" >Подписать на Change.org <img style="margin-left: 5px;" src="~assets/images/hand.png"/></button></a></div>
       </section>
-      <section class="card jumbotron supporting">
+      <section class="card jumbotron supporting" id="supporting">
         <div class="card-info" style="display: flex; align-items: center;">
           <h1>Нас поддержали</h1>
           <img class="only-desktop" style="width: 76px; margin-left: 40px" src="~assets/images/megaphone.png"/>
@@ -97,7 +118,7 @@
           </div>
         </div>
       </section>
-      <section class="card jumbotron contacts" style="padding-bottom: 0">
+      <section class="card jumbotron contacts" id="contacts" style="padding-bottom: 0">
         <div class="card-info" style="width: 100%">
           <h1>Контакты</h1>
         </div>
@@ -126,7 +147,7 @@
           <a target="_blank" href="https://tlgg.ru/d_makhn">Телеграм</a>
         </div>
       </div>
-      <section class="card jumbotron donate">
+      <section class="card jumbotron donate" id="donate">
         <div class="card-info" style="max-width: 100%">
           <h1>Поддержать проект</h1>
           <div class="card-info__text">
@@ -170,7 +191,7 @@
           <img src="/media-logos/novayagazeta.png" class="media-card__logo"/>
           <div class="media-card__heading">
             «Убивать экономику города нерационально»<br>
-            Интервью создателя интерактивной карты «Бизнес терпит бедствие» Данила Махницкого
+            Интервью создателя интерактивной карты «Бизнес терпит бедствие»
           </div>
         </a>
         <a href="https://secretmag.ru/news/predstavlena-karta-razoreniya-rossiiskogo-biznesa.htm" target="_blank" class="media-card">
@@ -179,11 +200,11 @@
             Представлена карта разорения российского бизнеса
           </div>
         </a>
-        <a href="https://meduza.io/episodes/2020/04/15/danil-mahnitskiy-sozdal-kartu-biznesa-terpyaschego-bedstvie-on-uveren-chto-predprinimateli-ob-edinyatsya-chtoby-pred-yavit-trebovaniya-pravitelstvu" target="_blank" class="media-card">
-          <img src="/media-logos/meduza.svg" class="media-card__logo"/>
+        <a href="https://www.kommersant.ru/doc/4325761" target="_blank" class="media-card">
+          <img src="/media-logos/kommersant.svg" class="media-card__logo"/>
           <div class="media-card__heading">
-            Данил Махницкий создал карту бизнеса, терпящего бедствие.<br>
-            Он уверен, что предприниматели объединятся, чтобы предъявить требования правительству
+            Помощь малому бизнесу не придет.<br>
+            Какие компании не могут претендовать на поддержку государства
           </div>
         </a>
         <a href="https://www.vedomosti.ru/management/articles/2020/04/16/828281-zhivetsya-individualnim" target="_blank" class="media-card">
@@ -529,6 +550,8 @@
 
 <style lang="sass">
   @import "../assets/styles/mixins.scss"
+  html
+      scroll-behavior: smooth
   .info
     &:not(:last-child)
       margin-bottom: 10px
@@ -540,15 +563,37 @@
   @mixin mobile
     @media (max-width: 768px)
       @content
-  @mixin desktop
+  @mixin desktop 
     @media (min-width: 769px)
       @content
   @mixin card
-    background: #F8F8F9
+    background: #F0F0F0
     padding: 30px 40px
     border-radius: 30px
     @include mobile
       padding: 20px !important
+  #menu
+    position: fixed
+    right: 5px
+    width: 10rem
+    z-index: 25
+    padding-bottom: 0.5rem
+    margin-top: 1rem
+    display: none
+    border-radius: 25px
+    background: #F0F0F0
+    padding: 15px
+    @include desktop
+      display: block
+  .menu-block
+    padding-top: 0.5rem
+  .menu-link
+    text-decoration: none
+    color: black
+  .menu-link:visited
+    color: black
+  .menu-link:hover
+    text-decoration: underline
   .card-mini
     @include card
   .only-mobile
@@ -762,7 +807,7 @@
         margin-top: 30px
 
     &.card-grey
-      background: #F8F8F9
+      background: #F0F0F0
     &-info
       &__text
         font-size: 18px
@@ -790,6 +835,7 @@
     margin-top: 30px
     font-size: 24px
     margin-bottom: 0px !important
+    text-align: center
   .map-container
     .map-title
       font-weight: bold
@@ -799,7 +845,7 @@
         max-width: calc(100vw - 20px)
         padding: 0 30px
       font-size: 24px
-      text-align: left
+      text-align: center
       width: 100%
       max-width: 775px
       margin-bottom: 30px
@@ -871,7 +917,7 @@
 
   .media-card
     width: calc(50% - 16px)
-    background: #F8F8F9
+    background: #F0F0F0
     border-radius: 30px
     text-decoration: none
     color: inherit
@@ -892,4 +938,6 @@
       line-height: 1.5
       margin: 16px 0 0
       height: 136px
+  #signal
+   margin-top: 0px 
 </style>

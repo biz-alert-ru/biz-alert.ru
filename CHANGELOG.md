@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+1. Добавлено меню
+2. Блоки теперь имеют порядок Карта - Сигнал тревоги - Счетчик - Бедствие - Петиция
+3. Изменен серый background цвет блоков
+4. Надпись Расскажите об инициативе (map-tip wrap) вынесена в отдельный блок
 
 ## [1.0.0] - 2020-04-13
 
@@ -17,4 +21,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 6. Добавлена кластеризация на картах
 7. Информация по клику перенесена из модального окна в балуны яндекс карт
 8. Добавлен блок "Сми"
-
