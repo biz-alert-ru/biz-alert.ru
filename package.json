@@ -15,7 +15,7 @@
     "dayjs": "^1.8.23",
     "element-ui": "^2.4.11",
     "firebase": "^7.13.0",
-    "gsap": "^3.2.6",
+    "gsap": "^3.6.0",
     "interact.js": "^1.2.8",
     "nuxt": "^2.0.0",
     "vue-yandex-maps": "^0.8.3"
