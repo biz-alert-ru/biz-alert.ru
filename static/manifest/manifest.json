@@ -1,0 +1,17 @@
+{
+	"name" : "Карта бизнеса, терпящего бедствие",
+	"short_name" : "Бизнес в беде",
+	"theme_color" : "transparent",
+	"description" : "Эта карта — сигнал тревоги. Мы призываем предпринимателей, которые терпят крах из-за карантина, размещать на ней метки с обозначением своего бизнеса.",
+	"orientation" : "any",
+	"background_color" : "transparent",
+	"icons" : [
+		{
+			"src": "https://biz-alert.ru/favicon.png",
+			"sizes": "32x32"
+		}
+    ],
+	"scope" : "/",
+	"start_url" : "/",
+    "display": "standalone"
+}
